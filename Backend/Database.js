@@ -21,6 +21,7 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
       password TEXT,
       salt TEXT,
       session_token TEXT,
+      avatarUrl TEXT,
       created_at TEXT DEFAULT (date('now', 'localtime'))
 
     )`, (err) => {

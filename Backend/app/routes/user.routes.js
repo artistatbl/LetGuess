@@ -1,3 +1,4 @@
+const express  = require ('express');
 const users = require("../controller/user.controller");
 const auth = require('../lib/authentication');
 
@@ -6,6 +7,7 @@ const auth = require('../lib/authentication');
 module.exports = function (app) {
   app.route("/users").post(users.create);
   app.get("/users/:username", users.getUserInfo);
+  app.post("users/picture", users.saveProfilePicture);
 
   //app.route("/login").post(users.login);
 

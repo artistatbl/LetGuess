@@ -18,26 +18,28 @@ const getHash = function (password, salt) {
 
 const findByUsername = (username, done) => {
 	const sql = "SELECT * FROM users WHERE username = ?";
-	
+   
 	db.get(sql, [username], (err, row) => {
 	  if (err) {
 	    return done(err);
 	  }
-
+   
 	  if (!row) {
 	    console.log(`User not found with Username: ${username}`);
 	    return done(null);
 	  }
-	  
-	  return done(null,{
-		  bio: row.bio,
-		  username: row.username,
-		  created: row.created_at,
-		  level: row.level
-	  });
+   
+	  const user = {
+	    bio: row.bio,
+	    username: row.username,
+	    created: row.created_at,
+	    level: row.level,
+	  };
+   
+	  return done(null, user);
 	});
-};
-
+   };
+   
 const addNewUser = (user, done) => {
 	const salt = crypto.randomBytes(64);
 	const hash = getHash(user.password, salt);
