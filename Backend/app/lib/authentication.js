@@ -4,7 +4,7 @@ const isAuthenticated = function (req, res, next) {
 	let token = req.get('X-Authorization');
 
 	user.getIdFromToken(token, (err, id) => {
-		console.log("here", err, id)
+		console.log("User's ID: ", id, "errors:", err)
 		if (err || id === null || !id) {
 			console.log(err, id)
 			return res.sendStatus(401);
@@ -14,7 +14,9 @@ const isAuthenticated = function (req, res, next) {
 	});
 };
 
+   
 module.exports = {
-	isAuthenticated: isAuthenticated
+	isAuthenticated: isAuthenticated,
+	//authenticate: authenticate,
 
 }
